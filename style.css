@@ -1,0 +1,240 @@
+*{ 
+  margin:0; 
+  padding:0
+}
+
+
+#header h1 {
+  font-size:40px;
+  font-weight: 700;
+  text-align: center;
+  font-family: 'Open Sans', sans-serif;
+  padding-top:30px;
+  /*border: 4px solid #000; */
+}
+
+/* The side navigation menu */
+.sidenav {
+  height: 40%; /* 100% Full-height */
+  width: 0; /* 0 width - change this with JavaScript */
+  position: fixed; /* Stay in place */
+  z-index: 10; /* Stay on top */
+  top: 100; /* Stay at the top */
+  right: 0;
+  background-color: black;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  display: block;
+  transition: 0.3s;
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+  color: #D3DFD9;
+}
+
+
+.openbtn {
+  position: absolute;
+  top: 35;
+  right: 90px;
+  font-size: 36px;
+  margin-left: 50px;
+  background-color: black;
+  text-decoration: none;
+  transition: 0.3s;
+  display: block;
+  color: white;
+}
+
+.openbtn a:hover {
+  color: #D3DFD9;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 50
+}
+
+#map {
+  padding: 100px; 
+  position: absolute; 
+  bottom: 0; 
+  top: 0; 
+  left: 0; 
+  right: 0; 
+  margin:100px; 
+  width: 80%; 
+  margin-left: auto; 
+  margin-right: auto;} 
+
+  .marker {
+    /*<-- icon flaticon.com ---> */ 
+      background-image: url('marker.png');
+      background-size: cover; 
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      z-index: 15;
+    }
+
+    .mapboxgl-popup {
+      max-width: 200px;
+    }
+    
+    .mapboxgl-popup-content {
+      text-align: center;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+
+
+
+/* The popup form - hidden by default */
+.form-popup {
+display: none;
+position: fixed;
+top: 45%;
+right: 40%;
+border: 3px solid #f1f1f1;
+z-index: 150;
+font-family: 'Open Sans', sans-serif;
+
+}
+
+/* Add styles to the form container */
+.form-container {
+max-width: 300px;
+padding: 10px;
+background-color: white;
+}
+
+
+/* Add some hover effects to buttons */
+.form-container .btn:hover, .open-button:hover {
+opacity: 1;
+}
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  font-size: 15px;
+  margin-left: 50px;
+  color: whitesmoke;
+  background-color: #718588;
+  border: 1px solid;
+  border-color: whitesmoke;
+  cursor: pointer;
+  padding: 10px;
+  width: 80%;
+  text-align: left;
+  transition: 0.4s;
+  position: relative;
+  
+}
+
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Style the dropdown. Note: hidden by default */
+.dropdown {
+  color: white;
+  display: none;
+  position: relative;
+  overflow: hidden;
+  height: 70px auto;
+  width: 150px;
+  padding-left: 70px;
+  background: black;
+  border: 3px solid;
+  border-color: black;
+  
+}
+
+
+
+input {
+  cursor: inherit;
+}
+
+/* Style the search button */
+.search {
+appearance: none;
+background-color: #FAFBFC;
+border: 1px solid rgba(27, 31, 35, 0.15);
+box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+box-sizing: border-box;
+color: #24292E;
+cursor: pointer;
+display: inline-block;
+font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+font-size: 14px;
+font-weight: 500;
+line-height: 20px;
+list-style: none;
+padding: 6px 16px;
+position: relative;
+transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+user-select: none;
+-webkit-user-select: none;
+touch-action: manipulation;
+vertical-align: middle;
+white-space: nowrap;
+word-wrap: break-word;
+}
+
+.search:hover {
+background-color: #F3F4F6;
+text-decoration: none;
+transition-duration: 0.1s;
+}
+
+.search:disabled {
+background-color: #FAFBFC;
+border-color: rgba(27, 31, 35, 0.15);
+color: #959DA5;
+cursor: default;
+}
+
+.search:active {
+background-color: #EDEFF2;
+box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+transition: none 0s;
+}
+
+.search:focus {
+outline: 1px transparent;
+}
+
+.search:before {
+display: none;
+}
+
+.search:-webkit-details-marker {
+display: none;
+}

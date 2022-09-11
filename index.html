@@ -1,0 +1,343 @@
+<!-- Code Attributes:
+<https://www.w3schools.com/howto/howto_js_sidenav.asp>
+<https://docs.mapbox.com/mapbox-gl-js/guides/> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>WIT Hackathon 2022</title>
+	<script src=
+	"https://code.jquery.com/jquery-3.6.0.js">
+	  </script>
+
+	<link rel="stylesheet" href="style.css">
+	<link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+	<script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+	<script type="text/javascript" src="functions.js"></script>
+
+	<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+</head>
+
+<body>
+
+	<div id="header">
+		<h1>#JustParkvillePings</h1>
+	</div>
+
+	<div id="map"></div>
+	
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiY2FsYmVydGkiLCJhIjoiY2w3djVld3ZzMDhnNTNubWVjZW55NXptZCJ9.d9MwlWnmzVX3Vh5AbBaNaA';
+
+    // Setting map and starting view
+		const bounds = [
+				[144.952987, -37.801146], 
+				[144.969121, -37.791786]
+				];
+
+		const map = new mapboxgl.Map({
+				container: 'map',
+				style: 'mapbox://styles/calberti/cl7v785o3000o15qdh0wej6sl', 
+				center: [144.9614, -37.7963], 
+				zoom: 15.5, 
+				maxBounds: bounds
+			});
+
+      //
+  fetch(`http://localhost:8001/meetup`).then(async(response)=>{const data = await response.json();
+  	for (const feature of data.features) {
+  const el = document.createElement('div');
+  el.className = 'marker';
+
+  new mapboxgl.Marker(el).setLngLat(feature.geometry.coordinates).setPopup(
+    new mapboxgl.Popup({ offset: 25 })
+      .setHTML(
+        `<h3>${feature.properties.title}</h3><p>${feature.properties.description}</p>`
+      )).addTo(map);
+
+} 
+  
+  })
+	
+  var nav = new mapboxgl.NavigationControl();
+	map.addControl(nav, 'top-left');
+
+	map.addControl(
+                new MapboxGeocoder({
+                accessToken: mapboxgl.accessToken,
+                mapboxgl: mapboxgl
+                })
+            );
+
+
+	</script> 
+
+	<script>
+  // Opening and closing sidebar: from w3schools. 
+	function openNav() {
+		document.getElementById("mySidenav").style.width = "280px";
+	}
+	function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+	}
+  </script>
+
+
+  <!-- Setting an open button-->
+	<a href="javascript:void(0)" class="openbtn" onclick="openNav()"><i class="material-symbols-outlined">filter_list</i><a>
+
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><i class="material-symbols-outlined">close</i><a>
+		<a href="#">Filter Pings</a>
+
+        <!-- Display for the filter function -->
+        <button href="#" class="accordion">Study Group</button>
+        <a2 href="#" class="dropdown">
+            <br>
+            Subject ID: <select name="sg_subjectId" >
+            <option value="">Select…</option>
+            <option value="1">COMP10001</option>
+            <option value="2">COMP10002</option>
+            <option value="3">COMP20008</option>
+            
+            </select class="pstyle">
+        <br>
+            
+            Building: <select name="sg_bd" id="sg_bd" >
+            <option value="">Select…</option>
+            <option value="1">Art West</option>
+            <option value="2">Baillieu Library</option>
+            <option value="3">Glyn Davis Building</option>
+        </select>
+
+        <br>
+            
+            Room: <select name="sg_inte" id="sg_inte" >
+            <option value="">Select…</option>
+            <option value="1">150</option>
+            <option value="2">151</option>
+            <option value="3">152</option>
+        </select>
+        <br>
+
+            <form action="/action_page.php" name="sg_date">
+                <label for="sg_date">Date:</label>
+                <input type="date" id="sg_date" name="sg_date">
+              </form>
+        
+            
+
+        <br>
+
+        <form action="/action_page.php" name="sg_startTime">
+            <label for="sg_startTime">Start Time:</label>
+            <input type="time" id="sg_startTime" name="sg_startTime">
+          </form>
+    
+        
+
+        <br>
+
+        <form action="/action_page.php" name="sg_endTime">
+            <label for="sg_endTime">End Time:</label>
+            <input type="time" id="sg_endTime" name="sg_endTime">
+        </form>
+
+        
+
+        <br>
+        
+
+        <button class="search" onclick="location.href='indexLocation.html'">Search</button>
+        <br><br>
+        </a2>
+
+        <button class="accordion">Meet Ups</button>
+        <a2 href="#" class="dropdown">
+            <br>
+            Location: 
+            <select name="mu_loc" id="mu_loc">
+                <option value="">Select…</option>
+                <option value="1">Union House</option>
+                <option value="2">South Lawn</option>
+                <option value="3">University Square</option>
+        </select>
+        
+        <br>
+            
+        <form action="/action_page.php" name="sg_date">
+            <label for="sg_date">Date:</label>
+            <input type="date" id="sg_date" name="sg_date">
+          </form>
+    
+        
+
+    <br>
+
+    <form action="/action_page.php" name="sg_startTime">
+        <label for="sg_startTime">Start Time:</label>
+        <input type="time" id="sg_startTime" name="sg_startTime">
+      </form>
+
+    
+
+    <br>
+
+    <form action="/action_page.php" name="sg_endTime">
+        <label for="sg_endTime">End Time:</label>
+        <input type="time" id="sg_endTime" name="sg_endTime">
+    </form>
+
+    
+
+    <br>
+
+        <button class="search" onclick="location.href='indexLocation.html'">Search</button>
+        <br><br>
+    </a2>
+
+        <button class="accordion">Events</button>
+        <a2 class="dropdown">
+          <br>
+            Organization: <select name="ev_org" id="ev_org">
+            <option value="">Select…</option>
+            <option value="1">UMSU Queer</option>
+            <option value="2">UMSU International</option>
+            <option value="3">GSA</option>
+        </select>
+        <br>
+            <br>
+            Location: <select name="ev_loc" id="ev_loc">
+            <option value="">Select…</option>
+            <option value="1">Art West</option>
+            <option value="2">Union House</option>
+            <option value="3">1888 Building</option>
+        </select>
+        <br>
+        <form action="/action_page.php" name="sg_date">
+            <label for="sg_date">Date:</label>
+            <input type="date" id="sg_date" name="sg_date">
+          </form>
+    
+        
+
+    <br>
+
+    <form action="/action_page.php" name="sg_startTime">
+        <label for="sg_startTime">Start Time:</label>
+        <input type="time" id="sg_startTime" name="sg_startTime">
+      </form>
+
+    
+
+    <br>
+
+    <form action="/action_page.php" name="sg_endTime">
+        <label for="sg_endTime">End Time:</label>
+        <input type="time" id="sg_endTime" name="sg_endTime">
+    </form>
+
+    
+
+    <br>
+
+        endtime
+        
+        organization
+
+        <button class="search" onclick="location.href='indexLocation.html'">Search</button>
+        <br><br>
+    </a2>
+		<a href="#" onclick="var newPin = createPin()">Upload a Ping</a>
+	</div>
+    <script src="filter.js"></script>
+	<script>
+		function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+
+
+	</script>
+
+	<script>
+		// Creates a pin!
+	function createPin(){
+	const tempmarker = new mapboxgl.Marker({
+      draggable: true
+      })
+      .setLngLat([144.961722, -37.794320])
+      .addTo(map);
+      closeNav();
+	let btn = document.createElement("button");
+	btn.innerHTML = "Set This Location";
+	btn.style = 'font-weight:900; border: 2px solid black; position:absolute;top: 50%; right: 45%; font-size:15px; text-align:center; z-index:100; font-family: sans-serif; border-radius: 8px; padding: 15px 32px; background-color: white; border:none; text-decoration:none';
+	btn.addEventListener("click", function () {
+		const lngLat = tempmarker.getLngLat();
+		var longitude = lngLat.lng;
+		var latitude = lngLat.lat;
+		const marker = new mapboxgl.Marker().setLngLat([longitude, latitude]).addTo(map);
+		tempmarker.remove;
+		btn.remove()
+		openForm();
+		$(document).ready(function () {
+	
+	// Bind the click event to the function
+	$("#buttonId").click(function () {
+		
+		var title = document.getElementById('title').value;
+		var description = document.getElementById('description').value;
+		const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(
+			`<h3>${title}</h3><p>${description}</p>`
+);
+marker.remove;
+const marker1 = new mapboxgl.Marker().setLngLat([longitude, latitude]).setPopup(popup).addTo(map);
+	})
+	})
+		});
+	document.body.appendChild(btn);
+	}
+
+	</script>
+
+	<div class="form-popup" id="myForm">
+	<form action="" id="formID" class="form-container">
+		<h2>Enter Event Details</h2>
+
+		<label for="title"><b>Title</b></label>
+		<input type="text" name="title" id="title" required>
+        <br>
+
+		<label for="description"><b>Description</b></label>
+		<input type="text" name="description" id="description" required>
+        <br>
+
+		<label for="date"><b>Date</b></label>
+		<input type="date" name="date" id="date" required>
+        <br>
+
+		<label for="start time"><b>Start Time</b></label>
+		<input type="time" name="start time" id="start time" required>
+        <br>
+
+		<label for="end time"><b>End Time</b></label>
+		<input type="time" name="end time" id="endtime">
+        <br>
+
+		<button type="button" id="buttonId" onclick="closeForm()" >Submit</button>
+	</form>
+	</div>
+
+	
+
+</div>
+</body>
+</html>
